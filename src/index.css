@@ -1,0 +1,277 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cyberpunk Hacker Theme Design System with Urbanist */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Cyberpunk color palette */
+    --background: 0 0% 3%;
+    --foreground: 120 100% 85%;
+
+    --card: 0 0% 8%;
+    --card-foreground: 120 100% 85%;
+
+    --popover: 0 0% 8%;
+    --popover-foreground: 120 100% 85%;
+
+    --primary: 120 100% 50%;
+    --primary-foreground: 0 0% 3%;
+
+    --secondary: 180 100% 50%;
+    --secondary-foreground: 0 0% 3%;
+
+    --muted: 0 0% 15%;
+    --muted-foreground: 120 50% 60%;
+
+    --accent: 300 100% 70%;
+    --accent-foreground: 0 0% 3%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 120 30% 25%;
+    --input: 0 0% 15%;
+    --ring: 120 100% 50%;
+
+    --radius: 0.25rem;
+
+    /* Custom hacker theme variables */
+    --neon-green: 120 100% 50%;
+    --neon-cyan: 180 100% 50%;
+    --neon-purple: 300 100% 70%;
+    --terminal-green: 120 100% 85%;
+    --matrix-green: 120 100% 40%;
+    --shadow-neon: 0 0 20px hsl(var(--neon-green) / 0.5);
+    --shadow-glow: 0 0 40px hsl(var(--neon-green) / 0.3);
+    --glitch-shadow: 2px 2px 0 hsl(var(--neon-cyan)), -2px -2px 0 hsl(var(--neon-purple));
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+@layer components {
+  /* macOS-like cursor */
+  .macos-cursor {
+    width: 2px;
+    height: 1.1em;
+    background: linear-gradient(to bottom, transparent 0%, hsl(var(--terminal-green)) 20%, hsl(var(--terminal-green)) 80%, transparent 100%);
+    border-radius: 1px;
+    vertical-align: text-bottom;
+    animation: macos-cursor-blink 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  /* Coding text styling */
+  .coding-text {
+    background: linear-gradient(
+      45deg,
+      hsl(var(--neon-cyan)),
+      hsl(var(--neon-purple)),
+      hsl(var(--neon-green)),
+      hsl(var(--neon-cyan))
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-shift 4s ease-in-out infinite;
+  }
+
+  /* Matrix rain */
+  .matrix-rain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.1;
+  }
+
+  /* Profile image glow */
+  .profile-glow {
+    box-shadow: 
+      0 0 30px hsl(var(--neon-green) / 0.5),
+      0 0 60px hsl(var(--neon-green) / 0.3),
+      0 0 90px hsl(var(--neon-green) / 0.1);
+  }
+
+  /* Enhanced neon card with slow, smooth wave-like hover effect */
+  .neon-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border));
+    transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .neon-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      120deg, 
+      transparent 0%, 
+      hsl(var(--neon-green) / 0.02) 25%,
+      hsl(var(--neon-green) / 0.05) 50%,
+      hsl(var(--neon-green) / 0.08) 65%,
+      hsl(var(--neon-green) / 0.05) 75%,
+      hsl(var(--neon-green) / 0.02) 90%,
+      transparent 100%
+    );
+    transition: left 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .neon-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+      hsl(var(--neon-green) / 0.04) 0%,
+      hsl(var(--neon-green) / 0.02) 25%,
+      transparent 60%
+    );
+    opacity: 0;
+    transition: opacity 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    pointer-events: none;
+  }
+
+  .neon-card:hover::before {
+    left: 100%;
+  }
+
+  .neon-card:hover::after {
+    opacity: 1;
+  }
+
+  .neon-card:hover {
+    border-color: hsl(var(--neon-green) / 0.3);
+    box-shadow: 
+      0 0 15px hsl(var(--neon-green) / 0.15),
+      0 0 30px hsl(var(--neon-green) / 0.08),
+      0 4px 20px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+
+  /* Smooth pulse animation for links - much slower */
+  .pulse-glow {
+    animation: pulse-glow-smooth 8s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+  }
+}
+
+@layer utilities {
+  .text-neon-green {
+    color: hsl(var(--neon-green));
+  }
+  
+  .text-neon-cyan {
+    color: hsl(var(--neon-cyan));
+  }
+  
+  .text-neon-purple {
+    color: hsl(var(--neon-purple));
+  }
+  
+  .text-terminal {
+    color: hsl(var(--terminal-green));
+  }
+}
+
+/* Enhanced Keyframes */
+@keyframes macos-cursor-blink {
+  0%, 45% { opacity: 1; }
+  46%, 54% { opacity: 0; }
+  55%, 100% { opacity: 1; }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 25%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 75%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse-glow-smooth {
+  0% {
+    box-shadow: 0 0 5px hsl(var(--neon-green) / 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 10px hsl(var(--neon-green) / 0.2),
+      0 0 20px hsl(var(--neon-green) / 0.1);
+  }
+  100% {
+    box-shadow: 
+      0 0 8px hsl(var(--neon-green) / 0.15),
+      0 0 16px hsl(var(--neon-green) / 0.08);
+  }
+}
